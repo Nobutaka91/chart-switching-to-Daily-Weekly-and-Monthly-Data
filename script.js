@@ -1,29 +1,30 @@
+// 日本のGreenwich Mean Time(GMT)は+9
+const months = [
+  { x: Date.parse('2023-01-01  GMT+0900'), y: 4 },
+  { x: Date.parse('2023-02-01 00:00:00 GMT+0900'), y: 3 },
+  { x: Date.parse('2023-03-01 00:00:00 GMT+0900'), y: 3 },
+  { x: Date.parse('2023-04-01 00:00:00 GMT+0900'), y: 3 },
+  { x: Date.parse('2023-05-01 00:00:00 GMT+0900'), y: 4 },
+  { x: Date.parse('2023-06-01 00:00:00 GMT+0900'), y: 7 },
+  { x: Date.parse('2023-07-01 00:00:00 GMT+0900'), y: 9 },
+  { x: Date.parse('2023-08-01 00:00:00 GMT+0900'), y: 13 },
+  { x: Date.parse('2023-09-01 00:00:00 GMT+0900'), y: 15 },
+  { x: Date.parse('2023-10-01 00:00:00 GMT+0900'), y: 16 },
+  { x: Date.parse('2023-11-01 00:00:00 GMT+0900'), y: 9 },
+  { x: Date.parse('2023-12-01 00:00:00 GMT+0900'), y: 8 },
+];
+
 // setup
 const data = {
-  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  labels: [],
   datasets: [
     {
-      label: 'Weekly Sales',
-      data: [18, 12, 6, 9, 12, 3, 9],
-      backgroundColor: [
-        'rgba(255, 26, 104, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(0, 0, 0, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 26, 104, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-        'rgba(0, 0, 0, 1)',
-      ],
+      label: 'Leaves 🥬',
+      data: months,
+      backgroundColor: 'springGreen',
+      borderColor: 'springGreen',
       borderWidth: 1,
+      borderRadius: 15, // 棒グラフの先端に丸みをだす
     },
   ],
 };
@@ -31,11 +32,41 @@ const data = {
 // config
 const config = {
   type: 'bar',
-  data,
+  data: data,
   options: {
     scales: {
+      x: {
+        type: 'time',
+        time: {
+          unit: 'month',
+          displayFormats: {
+            month: 'MMM', // 月表記を指定('M'～'MMMMM'の4パターン)
+          },
+        },
+        ticks: {
+          font: {
+            size: 9,
+          },
+        },
+        grid: {
+          display: false, // x軸のgrid線
+        },
+      },
       y: {
         beginAtZero: true,
+        ticks: {
+          font: {
+            size: 10,
+          },
+        },
+        grid: {
+          display: true, // y軸のgrid線
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: true, // グラフのタイトル
       },
     },
   },
